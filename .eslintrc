@@ -1,0 +1,17 @@
+{
+    "env": {
+        "es6": true,
+        "node": true,
+        "browser": true
+    },
+    "ecmaFeatures": {
+        "modules": true
+    },
+    "rules": {
+        "indent": [2, 4],
+        "quotes": [2, "single"],
+        "linebreak-style": [2, "windows"],
+        "semi": [2, "always"]
+    },
+    "extends": "eslint:recommended"
+}
