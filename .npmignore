@@ -9,3 +9,4 @@
 /.npmignore
 /buildconf.js
 /gulpfile.js
+/test.js
