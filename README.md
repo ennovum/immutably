@@ -1,7 +1,8 @@
 # immutably
 
 Dead simple immutability for JS.
-A setter that performs changes of nested values in data objects in the immutable way.
+
+A collection of setters that performs changes in data objects in the immutable way.
 
 ## Install
 
@@ -12,7 +13,32 @@ npm install immutably
 
 ## Use
 
-### Set
+### `apply`
+
+```
+output = immutably.apply(input, path, applyFn);
+```
+
+**Arguments**
+
+* `input` *(object)* data object.
+* `path` *(string)* data object's new nested value path.
+* `applyFn` *(function)* a function that gets a value as an argument, applies a change and returns a new value.
+
+**Returns**
+
+* `output` *(object)* new data object with the given new nested value set to the given path.
+
+**Examples**
+
+Basic use:
+```
+const input = {foo: {bar: {baz: false}}};
+const output = immutably.set(input, 'foo.bar.baz', (value) => !value);
+output; // {foo: {bar: {baz: true}}}
+```
+
+### `set`
 
 ```
 output = immutably.set(input, path, value);
@@ -20,28 +46,21 @@ output = immutably.set(input, path, value);
 
 **Arguments**
 
-`input` *(object)* data object.
-`path` *(string)* data object's new nested value path.
-`value` *(any)* data object's new nested value.
+* `input` *(object)* data object.
+* `path` *(string)* data object's new nested value path.
+* `value` *(any)* data object's new nested value.
 
 **Returns**
 
-`output` *(object)* new data object with the given new nested value set to the given path.
+* `output` *(object)* new data object with the given new nested value set to the given path.
 
 **Examples**
 
 Basic use:
 ```
-const input = {foo: {bar: {baz: true}}};
-const output = immutably.set(input, 'foo.bar.baz', true);
-output; // {foo: {bar: {baz: true}}}
-input === output; // true
-```
-```
 const input = {foo: {bar: {baz: false}}};
 const output = immutably.set(input, 'foo.bar.baz', true);
 output; // {foo: {bar: {baz: true}}}
-input === output; // false
 ```
 
 You can find more examples in the test files.
