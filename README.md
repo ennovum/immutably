@@ -21,13 +21,14 @@ output = immutably.apply(input, path, applyFn);
 
 **Arguments**
 
-* `input` *(object)* data object.
-* `path` *(string)* data object's new nested value path.
+* `input` *(object)* input data object.
+* `path` *(string)* input data object's new nested value path.
 * `applyFn` *(function)* a function that gets a value as an argument, applies a change and returns a new value.
+* `output` *(object)* output data object.
 
 **Returns**
 
-* `output` *(object)* new data object with the given new nested value set to the given path.
+* `output` *(object)* output data object with the given new nested value set to the given path.
 
 **Examples**
 
@@ -38,6 +39,12 @@ const output = immutably.set(input, 'foo.bar.baz', (value) => !value);
 output; // {foo: {bar: {baz: true}}}
 ```
 
+You can find more examples in the test files.
+
+**Warning**
+
+The output data object passed through arguments is going to be *mutated*. It is supposed to be used only for transactions and such. In most cases you should just skip it.
+
 ### `set`
 
 ```
@@ -46,13 +53,14 @@ output = immutably.set(input, path, value);
 
 **Arguments**
 
-* `input` *(object)* data object.
-* `path` *(string)* data object's new nested value path.
-* `value` *(any)* data object's new nested value.
+* `input` *(object)* input data object.
+* `path` *(string)* input data object's new nested value path.
+* `value` *(any)* input data object's new nested value.
+* `output` *(object)* output data object.
 
 **Returns**
 
-* `output` *(object)* new data object with the given new nested value set to the given path.
+* `output` *(object)* output data object with the given new nested value set to the given path.
 
 **Examples**
 
@@ -65,10 +73,14 @@ output; // {foo: {bar: {baz: true}}}
 
 You can find more examples in the test files.
 
+**Warning**
+
+The output data object passed through arguments is going to be *mutated*. It is supposed to be used only for transactions and such. In most cases you should just skip it.
+
 ## Roadmap
 
 * **merge** - merging objects
-* **push**, **pop**, **shift**, **unshift**, **splice**, **slice** - working with arrays
+* **push**, **pop**, **shift**, **unshift**, **splice** - working with arrays
 
 ## Develop
 
