@@ -3,14 +3,23 @@ import pathseq from 'pathseq';
 import {arrayClone, objectClone} from './utils';
 
 function apply(input, path, applyFn, output) {
+    if (path === null || path === undefined) {
+        return valueApply(input, applyFn, output);
+    }
     if (Array.isArray(path)) {
         return sequenceApply(input, path, applyFn, output);
     }
     return pathApply(input, path, applyFn, output);
 }
 
+function valueApply(input, applyFn, output) {
+    output = applyFn(input, output);
+    return output;
+}
+
 function pathApply(input, path, applyFn, output) {
     const sequence = pathseq(path);
+
     output = sequenceApply(input, sequence, applyFn, output);
     return output;
 }

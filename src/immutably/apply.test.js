@@ -208,3 +208,29 @@ test('immutably / apply / apply new value on an empty object (complex path, with
     testCase.doesNotThrow(testScenario);
     testCase.end();
 });
+
+test('immutably / apply / apply the same value on a value (no path)', (testCase) => {
+    const testScenario = () => {
+        const input = true;
+        const resultOutput = apply(input, null, (value) => value);
+        const expectedOutput = true;
+
+        testCase.equal(resultOutput, expectedOutput);
+    };
+
+    testCase.doesNotThrow(testScenario);
+    testCase.end();
+});
+
+test('immutably / apply / apply new value on a value (no path)', (testCase) => {
+    const testScenario = () => {
+        const input = false;
+        const resultOutput = apply(input, null, (value) => !value);
+        const expectedOutput = true;
+
+        testCase.equal(resultOutput, expectedOutput);
+    };
+
+    testCase.doesNotThrow(testScenario);
+    testCase.end();
+});
