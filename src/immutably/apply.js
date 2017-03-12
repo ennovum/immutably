@@ -2,60 +2,64 @@ import pathseq from 'pathseq';
 
 import {arrayClone, objectClone} from './utils';
 
-function apply(input, path, applyFn) {
-    if (Array.isArray(path)) return sequenceApply(input, path, applyFn);
-    return pathApply(input, path, applyFn);
+function apply(input, path, applyFn, output) {
+    if (Array.isArray(path)) {
+        return sequenceApply(input, path, applyFn, output);
+    }
+    return pathApply(input, path, applyFn, output);
 }
 
-function pathApply(input, path, applyFn) {
+function pathApply(input, path, applyFn, output) {
     const sequence = pathseq(path);
-    const output = sequenceApply(input, sequence, applyFn);
+    output = sequenceApply(input, sequence, applyFn, output);
     return output;
 }
 
-function sequenceApply(input, sequence, applyFn) {
+function sequenceApply(input, sequence, applyFn, output) {
     const [key, ...subSequence] = sequence;
 
     if (subSequence.length) {
         const subInput = input ? input[key] : undefined;
-        const subOutput = sequenceApply(subInput, subSequence, applyFn);
-        const output = keyApply(input, key, () => subOutput);
+        let subOutput = output ? output[key] : undefined;
+        subOutput = sequenceApply(subInput, subSequence, applyFn, subOutput);
+        output = keyApply(input, key, () => subOutput, output);
         return output;
     }
     else {
-        const output = keyApply(input, key, applyFn);
+        output = keyApply(input, key, applyFn, output);
         return output;
     }
 }
 
-function keyApply(input, key, applyFn) {
-    if (typeof key === 'number') return arrayKeyApply(input, key, applyFn);
-    return objectKeyApply(input, key, applyFn);
+function keyApply(input, key, applyFn, output) {
+    if (typeof key === 'number') {
+        return arrayKeyApply(input, key, applyFn, output);
+    }
+    return objectKeyApply(input, key, applyFn, output);
 }
 
-function arrayKeyApply(input, key, applyFn) {
+function arrayKeyApply(input, key, applyFn, output) {
     if (!input) input = [];
 
     const value = input[key];
     const newValue = applyFn(value);
     if (value === newValue) return input;
 
-    const output = arrayClone(input);
+    if (!output) output = arrayClone(input);
     output[key] = newValue;
     return output;
 }
 
-function objectKeyApply(input, key, applyFn) {
+function objectKeyApply(input, key, applyFn, output) {
     if (!input) input = {};
 
     const value = input[key];
     const newValue = applyFn(value);
     if (value === newValue) return input;
 
-    const output = objectClone(input);
+    if (!output) output = objectClone(input);
     output[key] = newValue;
     return output;
 }
 
-export default apply;
 export {apply};
