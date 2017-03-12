@@ -2,7 +2,7 @@ import test from 'tape';
 
 import {set} from './set';
 
-test('immutably / set a primitive value on an object', (testCase) => {
+test('immutably / set / set a primitive value on an object', (testCase) => {
     const testScenario = () => {
         const input = {foo: false};
         const value = true;
@@ -15,7 +15,7 @@ test('immutably / set a primitive value on an object', (testCase) => {
     testCase.end();
 });
 
-test('immutably / set a primitive value on an empty object', (testCase) => {
+test('immutably / set / set a primitive value on an empty object', (testCase) => {
     const testScenario = () => {
         const input = {};
         const value = true;
@@ -28,7 +28,7 @@ test('immutably / set a primitive value on an empty object', (testCase) => {
     testCase.end();
 });
 
-test('immutably / set a non-primitive value on an object', (testCase) => {
+test('immutably / set / set a non-primitive value on an object', (testCase) => {
     const testScenario = () => {
         const input = {foo: {bar: false}};
         const value = {bar: true};
@@ -41,7 +41,7 @@ test('immutably / set a non-primitive value on an object', (testCase) => {
     testCase.end();
 });
 
-test('immutably / set a non-primitive value on an empty object', (testCase) => {
+test('immutably / set / set a non-primitive value on an empty object', (testCase) => {
     const testScenario = () => {
         const input = {};
         const value = {bar: true};

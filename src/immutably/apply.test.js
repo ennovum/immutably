@@ -2,7 +2,7 @@ import test from 'tape';
 
 import {apply} from './apply';
 
-test('immutably / apply the same value on an object (simple path, no array)', (testCase) => {
+test('immutably / apply / apply the same value on an object (simple path, no array)', (testCase) => {
     const testScenario = () => {
         const input = {foo: true};
         const resultOutput = apply(input, 'foo', (value) => value);
@@ -16,7 +16,7 @@ test('immutably / apply the same value on an object (simple path, no array)', (t
     testCase.end();
 });
 
-test('immutably / apply new value on an object (simple path, no array)', (testCase) => {
+test('immutably / apply / apply new value on an object (simple path, no array)', (testCase) => {
     const testScenario = () => {
         const input = {foo: false};
         const resultOutput = apply(input, 'foo', (value) => !value);
@@ -30,7 +30,7 @@ test('immutably / apply new value on an object (simple path, no array)', (testCa
     testCase.end();
 });
 
-test('immutably / apply new value on an empty object (simple path, no array)', (testCase) => {
+test('immutably / apply / apply new value on an empty object (simple path, no array)', (testCase) => {
     const testScenario = () => {
         const input = {};
         const resultOutput = apply(input, 'foo', (value) => !value);
@@ -44,7 +44,7 @@ test('immutably / apply new value on an empty object (simple path, no array)', (
     testCase.end();
 });
 
-test('immutably / apply the same value on an object (simple path, with an array)', (testCase) => {
+test('immutably / apply / apply the same value on an object (simple path, with an array)', (testCase) => {
     const testScenario = () => {
         const input = {foo: [true]};
         const resultOutput = apply(input, 'foo[0]', (value) => value);
@@ -58,7 +58,7 @@ test('immutably / apply the same value on an object (simple path, with an array)
     testCase.end();
 });
 
-test('immutably / apply new value on an object (simple path, with an array)', (testCase) => {
+test('immutably / apply / apply new value on an object (simple path, with an array)', (testCase) => {
     const testScenario = () => {
         const input = {foo: [false]};
         const resultOutput = apply(input, 'foo[0]', (value) => !value);
@@ -72,7 +72,7 @@ test('immutably / apply new value on an object (simple path, with an array)', (t
     testCase.end();
 });
 
-test('immutably / apply new value on an empty object (simple path, with an array)', (testCase) => {
+test('immutably / apply / apply new value on an empty object (simple path, with an array)', (testCase) => {
     const testScenario = () => {
         const input = {};
         const resultOutput = apply(input, 'foo[0]', (value) => !value);
@@ -86,7 +86,7 @@ test('immutably / apply new value on an empty object (simple path, with an array
     testCase.end();
 });
 
-test('immutably / apply the same value on an object (complex path, without arrays, deep check)', (testCase) => {
+test('immutably / apply / apply the same value on an object (complex path, without arrays, deep check)', (testCase) => {
     const testScenario = () => {
         const input = {foo: {bar: {baz: true}}, xxx: {yyy: true}};
         const resultOutput = apply(input, 'foo.bar.baz', (value) => value);
@@ -106,7 +106,7 @@ test('immutably / apply the same value on an object (complex path, without array
     testCase.end();
 });
 
-test('immutably / apply new value on an object (complex path, without arrays, deep check)', (testCase) => {
+test('immutably / apply / apply new value on an object (complex path, without arrays, deep check)', (testCase) => {
     const testScenario = () => {
         const input = {foo: {bar: {baz: false}}, xxx: {yyy: true}};
         const resultOutput = apply(input, 'foo.bar.baz', (value) => !value);
@@ -126,7 +126,7 @@ test('immutably / apply new value on an object (complex path, without arrays, de
     testCase.end();
 });
 
-test('immutably / apply new value on an empty object (complex path, without arrays, deep check)', (testCase) => {
+test('immutably / apply / apply new value on an empty object (complex path, without arrays, deep check)', (testCase) => {
     const testScenario = () => {
         const input = {xxx: {yyy: true}};
         const resultOutput = apply(input, 'foo.bar.baz', (value) => !value);
@@ -143,7 +143,7 @@ test('immutably / apply new value on an empty object (complex path, without arra
     testCase.end();
 });
 
-test('immutably / apply the same value on an object (complex path, with arrays, deep check)', (testCase) => {
+test('immutably / apply / apply the same value on an object (complex path, with arrays, deep check)', (testCase) => {
     const testScenario = () => {
         const input = {foo: [{bar: [undefined, [undefined, undefined, {baz: true}]]}], xxx: [{yyy: true}]};
         const resultOutput = apply(input, 'foo[0].bar[1][2].baz', (value) => value);
@@ -167,7 +167,7 @@ test('immutably / apply the same value on an object (complex path, with arrays, 
     testCase.end();
 });
 
-test('immutably / apply new value on an object (complex path, with arrays, deep check)', (testCase) => {
+test('immutably / apply / apply new value on an object (complex path, with arrays, deep check)', (testCase) => {
     const testScenario = () => {
         const input = {foo: [{bar: [undefined, [undefined, undefined, {baz: false}]]}], xxx: [{yyy: true}]};
         const resultOutput = apply(input, 'foo[0].bar[1][2].baz', (value) => !value);
@@ -191,7 +191,7 @@ test('immutably / apply new value on an object (complex path, with arrays, deep 
     testCase.end();
 });
 
-test('immutably / apply new value on an empty object (complex path, with arrays, deep check)', (testCase) => {
+test('immutably / apply / apply new value on an empty object (complex path, with arrays, deep check)', (testCase) => {
     const testScenario = () => {
         const input = {xxx: [{yyy: true}]};
         const resultOutput = apply(input, 'foo[0].bar[1][2].baz', (value) => !value);

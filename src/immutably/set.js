@@ -1,7 +1,7 @@
 import {apply} from './apply';
 
-function set(data, path, newValue) {
-    return apply(data, path, () => newValue);
+function set(input, path, newValue) {
+    return apply(input, path, () => newValue);
 }
 
 export default set;
