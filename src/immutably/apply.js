@@ -31,43 +31,45 @@ function sequenceApply(input, sequence, applyFn, output) {
         const subInput = input ? input[key] : undefined;
         let subOutput = output ? output[key] : undefined;
         subOutput = sequenceApply(subInput, subSequence, applyFn, subOutput);
-        output = keyApply(input, key, () => subOutput, output);
+        output = keyValueApply(input, key, () => subOutput, output);
         return output;
     }
     else {
-        output = keyApply(input, key, applyFn, output);
+        output = keyValueApply(input, key, applyFn, output);
         return output;
     }
 }
 
-function keyApply(input, key, applyFn, output) {
+function keyValueApply(input, key, applyFn, output) {
     if (typeof key === 'number') {
-        return arrayKeyApply(input, key, applyFn, output);
+        return arrayKeyValueApply(input, key, applyFn, output);
     }
-    return objectKeyApply(input, key, applyFn, output);
+    return objectKeyValueApply(input, key, applyFn, output);
 }
 
-function arrayKeyApply(input, key, applyFn, output) {
+function arrayKeyValueApply(input, key, applyFn, output) {
     if (!input) input = [];
 
-    const value = input[key];
-    const newValue = applyFn(value);
-    if (value === newValue) return input;
+    const inputValue = input[key];
+    const outputValue = output ? output[key] : undefined;
+    const value = applyFn(inputValue, outputValue);
+    if (inputValue === value) return input;
 
     if (!output) output = arrayClone(input);
-    output[key] = newValue;
+    output[key] = value;
     return output;
 }
 
-function objectKeyApply(input, key, applyFn, output) {
+function objectKeyValueApply(input, key, applyFn, output) {
     if (!input) input = {};
 
-    const value = input[key];
-    const newValue = applyFn(value);
-    if (value === newValue) return input;
+    const inputValue = input[key];
+    const outputValue = output ? output[key] : undefined;
+    const value = applyFn(inputValue, outputValue);
+    if (inputValue === value) return input;
 
     if (!output) output = objectClone(input);
-    output[key] = newValue;
+    output[key] = value;
     return output;
 }
 
