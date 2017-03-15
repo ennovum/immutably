@@ -2,8 +2,23 @@ import test from 'tape';
 
 import {apply} from './apply';
 
-test('immutably / apply / apply the same value on an object (simple path, no array)', (testCase) => {
-    const testScenario = () => {
+test('immutably / apply / apply the same value on a value', (testCase) => {
+    const testScenario1 = () => {
+        const input = true;
+        const resultOutput = apply(input, null, (value) => value);
+        const expectedOutput = true;
+
+        testCase.deepEqual(resultOutput, expectedOutput);
+        testCase.equal(input, resultOutput);
+    };
+
+    testCase.doesNotThrow(testScenario1);
+
+    testCase.end();
+});
+
+test('immutably / apply / apply the same value on an object', (testCase) => {
+    const testScenario1 = () => {
         const input = {foo: true};
         const resultOutput = apply(input, 'foo', (value) => value);
         const expectedOutput = {foo: true};
@@ -12,40 +27,9 @@ test('immutably / apply / apply the same value on an object (simple path, no arr
         testCase.equal(input, resultOutput);
     };
 
-    testCase.doesNotThrow(testScenario);
-    testCase.end();
-});
+    testCase.doesNotThrow(testScenario1);
 
-test('immutably / apply / apply new value on an object (simple path, no array)', (testCase) => {
-    const testScenario = () => {
-        const input = {foo: false};
-        const resultOutput = apply(input, 'foo', (value) => !value);
-        const expectedOutput = {foo: true};
-
-        testCase.deepEqual(resultOutput, expectedOutput);
-        testCase.notEqual(input, resultOutput);
-    };
-
-    testCase.doesNotThrow(testScenario);
-    testCase.end();
-});
-
-test('immutably / apply / apply new value on an empty object (simple path, no array)', (testCase) => {
-    const testScenario = () => {
-        const input = {};
-        const resultOutput = apply(input, 'foo', (value) => !value);
-        const expectedOutput = {foo: true};
-
-        testCase.deepEqual(resultOutput, expectedOutput);
-        testCase.notEqual(input, resultOutput);
-    };
-
-    testCase.doesNotThrow(testScenario);
-    testCase.end();
-});
-
-test('immutably / apply / apply the same value on an object (simple path, with an array)', (testCase) => {
-    const testScenario = () => {
+    const testScenario2 = () => {
         const input = {foo: [true]};
         const resultOutput = apply(input, 'foo[0]', (value) => value);
         const expectedOutput = {foo: [true]};
@@ -54,40 +38,9 @@ test('immutably / apply / apply the same value on an object (simple path, with a
         testCase.equal(input, resultOutput);
     };
 
-    testCase.doesNotThrow(testScenario);
-    testCase.end();
-});
+    testCase.doesNotThrow(testScenario2);
 
-test('immutably / apply / apply new value on an object (simple path, with an array)', (testCase) => {
-    const testScenario = () => {
-        const input = {foo: [false]};
-        const resultOutput = apply(input, 'foo[0]', (value) => !value);
-        const expectedOutput = {foo: [true]};
-
-        testCase.deepEqual(resultOutput, expectedOutput);
-        testCase.notEqual(input, resultOutput);
-    };
-
-    testCase.doesNotThrow(testScenario);
-    testCase.end();
-});
-
-test('immutably / apply / apply new value on an empty object (simple path, with an array)', (testCase) => {
-    const testScenario = () => {
-        const input = {};
-        const resultOutput = apply(input, 'foo[0]', (value) => !value);
-        const expectedOutput = {foo: [true]};
-
-        testCase.deepEqual(resultOutput, expectedOutput);
-        testCase.notEqual(input, resultOutput);
-    };
-
-    testCase.doesNotThrow(testScenario);
-    testCase.end();
-});
-
-test('immutably / apply / apply the same value on an object (complex path, without arrays, deep check)', (testCase) => {
-    const testScenario = () => {
+    const testScenario3 = () => {
         const input = {foo: {bar: {baz: true}}, xxx: {yyy: true}};
         const resultOutput = apply(input, 'foo.bar.baz', (value) => value);
         const expectedOutput = {foo: {bar: {baz: true}}, xxx: {yyy: true}};
@@ -102,49 +55,9 @@ test('immutably / apply / apply the same value on an object (complex path, witho
         testCase.equal(input, resultOutput);
     };
 
-    testCase.doesNotThrow(testScenario);
-    testCase.end();
-});
+    testCase.doesNotThrow(testScenario3);
 
-test('immutably / apply / apply new value on an object (complex path, without arrays, deep check)', (testCase) => {
-    const testScenario = () => {
-        const input = {foo: {bar: {baz: false}}, xxx: {yyy: true}};
-        const resultOutput = apply(input, 'foo.bar.baz', (value) => !value);
-        const expectedOutput = {foo: {bar: {baz: true}}, xxx: {yyy: true}};
-
-        testCase.deepEqual(resultOutput, expectedOutput);
-
-        testCase.notEqual(input.foo.bar.baz, resultOutput.foo.bar.baz);
-        testCase.notEqual(input.foo.bar, resultOutput.foo.bar);
-        testCase.notEqual(input.foo, resultOutput.foo);
-        testCase.equal(input.xxx.yyy, resultOutput.xxx.yyy);
-        testCase.equal(input.xxx, resultOutput.xxx);
-        testCase.notEqual(input, resultOutput);
-    };
-
-    testCase.doesNotThrow(testScenario);
-    testCase.end();
-});
-
-test('immutably / apply / apply new value on an empty object (complex path, without arrays, deep check)', (testCase) => {
-    const testScenario = () => {
-        const input = {xxx: {yyy: true}};
-        const resultOutput = apply(input, 'foo.bar.baz', (value) => !value);
-        const expectedOutput = {foo: {bar: {baz: true}}, xxx: {yyy: true}};
-
-        testCase.deepEqual(resultOutput, expectedOutput);
-
-        testCase.equal(input.xxx.yyy, resultOutput.xxx.yyy);
-        testCase.equal(input.xxx, resultOutput.xxx);
-        testCase.notEqual(input, resultOutput);
-    };
-
-    testCase.doesNotThrow(testScenario);
-    testCase.end();
-});
-
-test('immutably / apply / apply the same value on an object (complex path, with arrays, deep check)', (testCase) => {
-    const testScenario = () => {
+    const testScenario4 = () => {
         const input = {foo: [{bar: [undefined, [undefined, undefined, {baz: true}]]}], xxx: [{yyy: true}]};
         const resultOutput = apply(input, 'foo[0].bar[1][2].baz', (value) => value);
         const expectedOutput = {foo: [{bar: [undefined, [undefined, undefined, {baz: true}]]}], xxx: [{yyy: true}]};
@@ -163,12 +76,67 @@ test('immutably / apply / apply the same value on an object (complex path, with 
         testCase.equal(input, resultOutput);
     };
 
-    testCase.doesNotThrow(testScenario);
+    testCase.doesNotThrow(testScenario4);
+
     testCase.end();
 });
 
-test('immutably / apply / apply new value on an object (complex path, with arrays, deep check)', (testCase) => {
-    const testScenario = () => {
+test('immutably / apply / apply a different value on a value', (testCase) => {
+    const testScenario1 = () => {
+        const input = false;
+        const resultOutput = apply(input, null, (value) => !value);
+        const expectedOutput = true;
+
+        testCase.deepEqual(resultOutput, expectedOutput);
+        testCase.notEqual(input, resultOutput);
+    };
+
+    testCase.doesNotThrow(testScenario1);
+
+    testCase.end();
+});
+
+test('immutably / apply / apply a different value on an object', (testCase) => {
+    const testScenario1 = () => {
+        const input = {foo: false};
+        const resultOutput = apply(input, 'foo', (value) => !value);
+        const expectedOutput = {foo: true};
+
+        testCase.deepEqual(resultOutput, expectedOutput);
+        testCase.notEqual(input, resultOutput);
+    };
+
+    testCase.doesNotThrow(testScenario1);
+
+    const testScenario2 = () => {
+        const input = {foo: [false]};
+        const resultOutput = apply(input, 'foo[0]', (value) => !value);
+        const expectedOutput = {foo: [true]};
+
+        testCase.deepEqual(resultOutput, expectedOutput);
+        testCase.notEqual(input, resultOutput);
+    };
+
+    testCase.doesNotThrow(testScenario2);
+
+    const testScenario3 = () => {
+        const input = {foo: {bar: {baz: false}}, xxx: {yyy: true}};
+        const resultOutput = apply(input, 'foo.bar.baz', (value) => !value);
+        const expectedOutput = {foo: {bar: {baz: true}}, xxx: {yyy: true}};
+
+        testCase.deepEqual(resultOutput, expectedOutput);
+
+        testCase.notEqual(input.foo.bar.baz, resultOutput.foo.bar.baz);
+        testCase.notEqual(input.foo.bar, resultOutput.foo.bar);
+        testCase.notEqual(input.foo, resultOutput.foo);
+        testCase.equal(input.xxx.yyy, resultOutput.xxx.yyy);
+        testCase.equal(input.xxx, resultOutput.xxx);
+        testCase.notEqual(input, resultOutput);
+    };
+
+    testCase.doesNotThrow(testScenario3);
+
+    const testScenario4 = () => {
         const input = {foo: [{bar: [undefined, [undefined, undefined, {baz: false}]]}], xxx: [{yyy: true}]};
         const resultOutput = apply(input, 'foo[0].bar[1][2].baz', (value) => !value);
         const expectedOutput = {foo: [{bar: [undefined, [undefined, undefined, {baz: true}]]}], xxx: [{yyy: true}]};
@@ -187,12 +155,49 @@ test('immutably / apply / apply new value on an object (complex path, with array
         testCase.notEqual(input, resultOutput);
     };
 
-    testCase.doesNotThrow(testScenario);
+    testCase.doesNotThrow(testScenario4);
+
     testCase.end();
 });
 
-test('immutably / apply / apply new value on an empty object (complex path, with arrays, deep check)', (testCase) => {
-    const testScenario = () => {
+test('immutably / apply / apply a different value on an empty object', (testCase) => {
+    const testScenario1 = () => {
+        const input = {};
+        const resultOutput = apply(input, 'foo', (value) => !value);
+        const expectedOutput = {foo: true};
+
+        testCase.deepEqual(resultOutput, expectedOutput);
+        testCase.notEqual(input, resultOutput);
+    };
+
+    testCase.doesNotThrow(testScenario1);
+
+    const testScenario2 = () => {
+        const input = {};
+        const resultOutput = apply(input, 'foo[0]', (value) => !value);
+        const expectedOutput = {foo: [true]};
+
+        testCase.deepEqual(resultOutput, expectedOutput);
+        testCase.notEqual(input, resultOutput);
+    };
+
+    testCase.doesNotThrow(testScenario2);
+
+    const testScenario3 = () => {
+        const input = {xxx: {yyy: true}};
+        const resultOutput = apply(input, 'foo.bar.baz', (value) => !value);
+        const expectedOutput = {foo: {bar: {baz: true}}, xxx: {yyy: true}};
+
+        testCase.deepEqual(resultOutput, expectedOutput);
+
+        testCase.equal(input.xxx.yyy, resultOutput.xxx.yyy);
+        testCase.equal(input.xxx, resultOutput.xxx);
+        testCase.notEqual(input, resultOutput);
+    };
+
+    testCase.doesNotThrow(testScenario3);
+
+    const testScenario4 = () => {
         const input = {xxx: [{yyy: true}]};
         const resultOutput = apply(input, 'foo[0].bar[1][2].baz', (value) => !value);
         const expectedOutput = {foo: [{bar: [, [, , {baz: true}]]}], xxx: [{yyy: true}]};
@@ -205,32 +210,7 @@ test('immutably / apply / apply new value on an empty object (complex path, with
         testCase.notEqual(input, resultOutput);
     };
 
-    testCase.doesNotThrow(testScenario);
-    testCase.end();
-});
+    testCase.doesNotThrow(testScenario4);
 
-test('immutably / apply / apply the same value on a value (no path)', (testCase) => {
-    const testScenario = () => {
-        const input = true;
-        const resultOutput = apply(input, null, (value) => value);
-        const expectedOutput = true;
-
-        testCase.equal(resultOutput, expectedOutput);
-    };
-
-    testCase.doesNotThrow(testScenario);
-    testCase.end();
-});
-
-test('immutably / apply / apply new value on a value (no path)', (testCase) => {
-    const testScenario = () => {
-        const input = false;
-        const resultOutput = apply(input, null, (value) => !value);
-        const expectedOutput = true;
-
-        testCase.equal(resultOutput, expectedOutput);
-    };
-
-    testCase.doesNotThrow(testScenario);
     testCase.end();
 });
