@@ -8,4 +8,12 @@ function objectClone(input) {
     return output;
 }
 
-export {arrayClone, objectClone};
+function isPrimitive(value) {
+    if (typeof value === 'object' && value !== null) return false;
+    return true;
+}
+
+export {
+    arrayClone, objectClone,
+    isPrimitive
+};

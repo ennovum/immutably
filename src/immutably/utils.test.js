@@ -1,6 +1,9 @@
 import test from 'tape';
 
-import {arrayClone, objectClone} from './utils';
+import {
+    arrayClone, objectClone,
+    isPrimitive
+} from './utils';
 
 test('immutably / utils / clone an array', (testCase) => {
     const testScenario1 = () => {
@@ -46,6 +49,22 @@ test('immutably / utils / clone an object', (testCase) => {
     };
 
     testCase.doesNotThrow(testScenario2);
+
+    testCase.end();
+});
+
+test('immutably / utils / checks primitive values', (testCase) => {
+    const testScenario = () => {
+        testCase.equal(isPrimitive(null), true);
+        testCase.equal(isPrimitive(undefined), true);
+        testCase.equal(isPrimitive(1), true);
+        testCase.equal(isPrimitive('a'), true);
+        testCase.equal(isPrimitive(true), true);
+        testCase.equal(isPrimitive({}), false);
+        testCase.equal(isPrimitive([]), false);
+    };
+
+    testCase.doesNotThrow(testScenario);
 
     testCase.end();
 });
