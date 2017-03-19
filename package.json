@@ -1,6 +1,6 @@
 {
   "name": "immutably",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Dead simple immutability for JS.",
   "author": "ennovum",
   "repository": "https://github.com/ennovum/immutably",
