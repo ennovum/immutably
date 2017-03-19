@@ -1,9 +1,58 @@
 import test from 'tape';
 
 import {
-    arrayClone, objectClone,
+    clone, arrayClone, objectClone,
     isPrimitive
 } from './utils';
+
+test('immutably / utils / clone with type detect', (testCase) => {
+    const testScenario1 = () => {
+        const input = true;
+        const output = clone(input);
+
+        testCase.deepEqual(input, output);
+    };
+
+    testCase.doesNotThrow(testScenario1);
+
+    const testScenario2 = () => {
+        const input = 123;
+        const output = clone(input);
+
+        testCase.deepEqual(input, output);
+    };
+
+    testCase.doesNotThrow(testScenario2);
+
+    const testScenario3 = () => {
+        const input = 'foo';
+        const output = clone(input);
+
+        testCase.deepEqual(input, output);
+    };
+
+    testCase.doesNotThrow(testScenario3);
+
+    const testScenario4 = () => {
+        const input = [];
+        const output = clone(input);
+
+        testCase.deepEqual(input, output);
+    };
+
+    testCase.doesNotThrow(testScenario4);
+
+    const testScenario5 = () => {
+        const input = {};
+        const output = clone(input);
+
+        testCase.deepEqual(input, output);
+    };
+
+    testCase.doesNotThrow(testScenario5);
+
+    testCase.end();
+});
 
 test('immutably / utils / clone an array', (testCase) => {
     const testScenario1 = () => {
