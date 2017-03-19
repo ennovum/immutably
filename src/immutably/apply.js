@@ -1,6 +1,6 @@
 import pathseq from 'pathseq';
 
-import {arrayClone, objectClone} from './utils';
+import {clone} from './utils';
 
 function apply(input, path, applyFn, output) {
     if (path === null || path === undefined) {
@@ -41,34 +41,16 @@ function sequenceApply(input, sequence, applyFn, output) {
 }
 
 function keyValueApply(input, key, applyFn, output) {
-    if (typeof key === 'number') {
-        return arrayKeyValueApply(input, key, applyFn, output);
+    if (!input) {
+        input = (typeof key === 'number') ? [] : {};
     }
-    return objectKeyValueApply(input, key, applyFn, output);
-}
-
-function arrayKeyValueApply(input, key, applyFn, output) {
-    if (!input) input = [];
 
     const inputValue = input[key];
     const outputValue = output ? output[key] : undefined;
     const value = applyFn(inputValue, outputValue);
     if (inputValue === value) return input;
 
-    if (!output) output = arrayClone(input);
-    output[key] = value;
-    return output;
-}
-
-function objectKeyValueApply(input, key, applyFn, output) {
-    if (!input) input = {};
-
-    const inputValue = input[key];
-    const outputValue = output ? output[key] : undefined;
-    const value = applyFn(inputValue, outputValue);
-    if (inputValue === value) return input;
-
-    if (!output) output = objectClone(input);
+    if (!output) output = clone(input);
     output[key] = value;
     return output;
 }
