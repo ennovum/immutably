@@ -18,12 +18,28 @@ function objectClone(input) {
     return output;
 }
 
-function isPrimitive(value) {
-    if (typeof value === 'object' && value !== null) return false;
+function isPrimitive(input) {
+    if (typeof input === 'object' && input !== null) return false;
     return true;
 }
 
+function reduce(input, reduceFn, output) {
+    if (Array.isArray(input)) {
+        return input.reduce(reduceFn, output);
+    }
+    return objectReduce(input, reduceFn, output);
+}
+
+function objectReduce(input, reduceFn, output) {
+    return Object.keys(input).reduce((output, key) => {
+        const value = input[key];
+        output = reduceFn(output, value, key);
+        return output;
+    }, output);
+}
+
 export {
-    arrayClone, objectClone,
-    isPrimitive
+    clone, arrayClone, objectClone,
+    isPrimitive,
+    reduce, objectReduce
 };
