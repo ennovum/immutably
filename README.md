@@ -77,9 +77,46 @@ You can find more examples in the test files.
 
 The output data object passed through arguments is going to be *mutated*. It is supposed to be used only for transactions and such. In most cases you should just skip it.
 
+### `merge`
+
+```
+output = immutably.merge(input, path, delta);
+```
+
+**Arguments**
+
+* `input` *(object)* input data object.
+* `path` *(string)* input data object's merging path.
+* `delta` *(object)* merge data object.
+* `output` *(object)* output data object.
+
+**Returns**
+
+* `output` *(object)* output data object merged with the given merge data object on the given path.
+
+**Examples**
+
+Basic use:
+```
+const input = {foo: {bar: {baz: false}}};
+const output = immutably.merge(input, 'foo.bar', {baz: true});
+output; // {foo: {bar: {baz: true}}}
+```
+
+You can find more examples in the test files.
+
+**Warning**
+
+The output data object passed through arguments is going to be *mutated*. It is supposed to be used only for transactions and such. In most cases you should just skip it.
+
+## Changelog
+
+* **1.0.0** - `immutably.set` implementation
+* **1.1.0** - `immutably.apply` implementation
+* **1.2.0** - `immutably.merge` implementation, `immutably.apply` refactoring
+
 ## Roadmap
 
-* **merge** - merging objects
 * **push**, **pop**, **shift**, **unshift**, **splice** - working with arrays
 
 ## Develop
