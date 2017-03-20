@@ -35,7 +35,7 @@ output = immutably.apply(input, path, applyFn);
 Basic use:
 ```
 const input = {foo: {bar: {baz: false}}};
-const output = immutably.set(input, 'foo.bar.baz', (value) => !value);
+const output = immutably.apply(input, 'foo.bar.baz', (value) => !value);
 output; // {foo: {bar: {baz: true}}}
 ```
 
@@ -111,13 +111,30 @@ The output data object passed through arguments is going to be *mutated*. It is 
 
 ## Changelog
 
-* **1.0.0** - `immutably.set` implementation
-* **1.1.0** - `immutably.apply` implementation
-* **1.2.0** - `immutably.merge` implementation, `immutably.apply` refactoring
+**1.2.1**
+
+* `import`/`export` bug fixed
+
+**1.2.0**
+
+* `immutably.merge` implemented & unit tested
+* `immutably.apply` refactoring
+* empty path proper handling
+* `output` as argument of all public functions
+
+**1.1.0**
+
+* `immutably.apply` implemented & unit tested
+* more unit tests for `immutably.set`
+
+**1.0.0**
+
+* `immutably.set` implemented & unit tested
 
 ## Roadmap
 
-* **push**, **pop**, **shift**, **unshift**, **splice** - working with arrays
+* **push**, **pop**, **shift**, **unshift**, **splice**
+* **map**, **reduce**
 
 ## Develop
 
