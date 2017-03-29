@@ -1,26 +1,30 @@
-import {apply} from './apply';
+import {apply, applyOn} from './apply';
 import {clone, isPrimitive, reduce} from './utils';
 
-function merge(input, path, value, output) {
-    return apply(input, path, (input, output) => valueMerge(input, value, output), output);
+function merge(input, path, delta) {
+    return apply(input, path, (input, output) => valueMergeOn(input, delta, output));
 }
 
-function valueMerge(input, value, output) {
-    if (isPrimitive(value)) {
-        return value;
+function mergeOn(input, path, delta, output) {
+    return applyOn(input, path, (input, output) => valueMergeOn(input, delta, output), output);
+}
+
+function valueMergeOn(input, delta, output) {
+    if (isPrimitive(delta)) {
+        return delta;
     }
-    return recurrentMerge(input, value, output);
+    return objectMergeOn(input, delta, output);
 }
 
-function recurrentMerge(input, value, output) {
-    output = reduce(value, (output, subValue, subKey) => {
+function objectMergeOn(input, delta, output) {
+    output = reduce(delta, (output, subValue, subKey) => {
         if (subValue === undefined) {
             return output;
         }
 
         const subInput = input[subKey];
         let subOutput = output ? output[subKey] : undefined;
-        subOutput = valueMerge(subInput, subValue, subOutput);
+        subOutput = valueMergeOn(subInput, subValue, subOutput);
 
         if (subInput !== subOutput) {
             if (output === undefined || output === input) output = clone(input);
@@ -33,4 +37,4 @@ function recurrentMerge(input, value, output) {
     return output;
 }
 
-export {merge};
+export {merge, mergeOn};

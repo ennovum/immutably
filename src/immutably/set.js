@@ -1,7 +1,11 @@
-import {apply} from './apply';
+import {apply, applyOn} from './apply';
 
-function set(input, path, value, output) {
-    return apply(input, path, () => value, output);
+function set(input, path, value) {
+    return apply(input, path, () => value);
 }
 
-export {set};
+function setOn(input, path, value, output) {
+    return applyOn(input, path, () => value, output);
+}
+
+export {set, setOn};

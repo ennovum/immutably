@@ -2,45 +2,49 @@ import pathseq from 'pathseq';
 
 import {clone} from './utils';
 
-function apply(input, path, applyFn, output) {
-    if (path === null || path === undefined) {
-        return valueApply(input, applyFn, output);
-    }
-    if (Array.isArray(path)) {
-        return sequenceApply(input, path, applyFn, output);
-    }
-    return pathApply(input, path, applyFn, output);
+function apply(input, path, applyFn) {
+    return applyOn(input, path, applyFn);
 }
 
-function valueApply(input, applyFn, output) {
+function applyOn(input, path, applyFn, output) {
+    if (path === null || path === undefined) {
+        return valueApplyOn(input, applyFn, output);
+    }
+    if (Array.isArray(path)) {
+        return sequenceApplyOn(input, path, applyFn, output);
+    }
+    return pathApplyOn(input, path, applyFn, output);
+}
+
+function valueApplyOn(input, applyFn, output) {
     output = applyFn(input, output);
     return output;
 }
 
-function pathApply(input, path, applyFn, output) {
+function pathApplyOn(input, path, applyFn, output) {
     const sequence = pathseq(path);
 
-    output = sequenceApply(input, sequence, applyFn, output);
+    output = sequenceApplyOn(input, sequence, applyFn, output);
     return output;
 }
 
-function sequenceApply(input, sequence, applyFn, output) {
+function sequenceApplyOn(input, sequence, applyFn, output) {
     const [key, ...subSequence] = sequence;
 
     if (subSequence.length) {
         const subInput = input ? input[key] : undefined;
         let subOutput = output ? output[key] : undefined;
-        subOutput = sequenceApply(subInput, subSequence, applyFn, subOutput);
-        output = keyValueApply(input, key, () => subOutput, output);
+        subOutput = sequenceApplyOn(subInput, subSequence, applyFn, subOutput);
+        output = keyValueApplyOn(input, key, () => subOutput, output);
         return output;
     }
     else {
-        output = keyValueApply(input, key, applyFn, output);
+        output = keyValueApplyOn(input, key, applyFn, output);
         return output;
     }
 }
 
-function keyValueApply(input, key, applyFn, output) {
+function keyValueApplyOn(input, key, applyFn, output) {
     if (!input) {
         input = (typeof key === 'number') ? [] : {};
     }
@@ -55,4 +59,4 @@ function keyValueApply(input, key, applyFn, output) {
     return output;
 }
 
-export {apply};
+export {apply, applyOn};
