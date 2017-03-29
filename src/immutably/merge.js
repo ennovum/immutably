@@ -23,7 +23,7 @@ function recurrentMerge(input, value, output) {
         subOutput = valueMerge(subInput, subValue, subOutput);
 
         if (subInput !== subOutput) {
-            if (!output) output = clone(input);
+            if (output === undefined || output === input) output = clone(input);
             output[subKey] = subOutput;
         }
 

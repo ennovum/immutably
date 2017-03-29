@@ -50,7 +50,7 @@ function keyValueApply(input, key, applyFn, output) {
     const value = applyFn(inputValue, outputValue);
     if (inputValue === value) return input;
 
-    if (!output) output = clone(input);
+    if (output === undefined || output === input) output = clone(input);
     output[key] = value;
     return output;
 }
