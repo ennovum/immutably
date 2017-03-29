@@ -94,6 +94,11 @@ You can find more examples in the test files.
 
 ## Changelog
 
+**1.2.2**
+
+* minor refactoring
+* project metadata update
+
 **1.2.1**
 
 * `import`/`export` bug fixed
