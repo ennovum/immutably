@@ -1,8 +1,9 @@
 {
   "name": "immutably",
   "version": "1.2.1",
-  "description": "Dead simple immutability for JS.",
-  "author": "ennovum",
+  "description": "Non-mutating operations on data structures.",
+  "author": "Grzegorz Wasiak (ennovum)",
+  "keywords": ["immutably", "immutable", "immutability", "set", "merge", "data", "structure", "state", "redux", "reducer", "mutation", "mutating"],
   "repository": "https://github.com/ennovum/immutably",
   "license": "MIT",
   "main": "dist/index.js",

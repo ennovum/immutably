@@ -1,8 +1,6 @@
 # immutably
 
-Dead simple immutability for JS.
-
-A collection of setters that performs changes in data objects in the immutable way.
+Non-mutating operations on data structures.
 
 ## Install
 
@@ -140,15 +138,15 @@ The output data object passed through arguments is going to be *mutated*. It is 
 
 If you want to fork and develop `immutably`, these commands are for you:
 ```
-npm run dev
-npm run test-dev
+$ npm run dev
+$ npm run test-dev
 ```
 
 ## Test
 
 `immutably` is equipped with a test suite. You can run it with:
 ```
-npm run test
+$ npm run test
 ```
 
 ## Licence
