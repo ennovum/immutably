@@ -1,40 +1,35 @@
-import {apply, applyOn} from './apply';
+import {apply} from './apply';
 import {clone, isPrimitive, reduce} from './utils';
 
 function merge(input, path, delta) {
-    return apply(input, path, (input, output) => valueMergeOn(input, delta, output));
+    return apply(input, path, (input) => valueMerge(input, delta));
 }
 
-function mergeOn(input, path, delta, output) {
-    return applyOn(input, path, (input, output) => valueMergeOn(input, delta, output), output);
-}
-
-function valueMergeOn(input, delta, output) {
+function valueMerge(input, delta) {
     if (isPrimitive(delta)) {
         return delta;
     }
-    return objectMergeOn(input, delta, output);
+    return objectMerge(input, delta);
 }
 
-function objectMergeOn(input, delta, output) {
-    output = reduce(delta, (output, subValue, subKey) => {
+function objectMerge(input, delta) {
+    const output = reduce(delta, (output, subValue, subKey) => {
         if (subValue === undefined) {
             return output;
         }
 
         const subInput = input[subKey];
-        let subOutput = output ? output[subKey] : undefined;
-        subOutput = valueMergeOn(subInput, subValue, subOutput);
+        const subOutput = valueMerge(subInput, subValue);
 
         if (subInput !== subOutput) {
-            if (output === undefined || output === input) output = clone(input);
+            if (output === undefined) output = clone(input);
             output[subKey] = subOutput;
         }
 
         return output;
-    }, output) || input;
+    }) || input;
 
     return output;
 }
 
-export {merge, mergeOn};
+export {merge};
