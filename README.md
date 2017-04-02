@@ -92,6 +92,34 @@ output; // {foo: {bar: {baz: true}}}
 
 You can find more examples in the test files.
 
+### `clone`
+
+```
+output = immutably.clone(input, path, deep);
+```
+
+**Arguments**
+
+* `input` *(object)* input data object.
+* `path` *(string)* input data object's merging path.
+* `deep` *(object)* deep clone switch.
+
+**Returns**
+
+* `output` *(object)* output data object cloned on the given path.
+
+**Examples**
+
+Basic use:
+```
+const input = {foo: {bar: {baz: false}}};
+const output = immutably.clone(input, 'foo.bar', false);
+output; // {foo: {bar: {baz: false}}}
+input.foo.bar === output.foo.bar; // false
+```
+
+You can find more examples in the test files.
+
 ## Changelog
 
 **1.2.2**
@@ -117,11 +145,6 @@ You can find more examples in the test files.
 **1.0.0**
 
 * `immutably.set` implemented & unit tested
-
-## Roadmap
-
-* **push**, **pop**, **shift**, **unshift**, **splice**
-* **map**, **reduce**
 
 ## Develop
 
