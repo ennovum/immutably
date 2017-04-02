@@ -1,5 +1,6 @@
 import {apply} from './apply';
-import {clone, isPrimitive, reduce} from './utils';
+import {isPrimitive, reduce} from './utils';
+import {clone} from './clone';
 
 function merge(input, path, delta) {
     return apply(input, path, (input) => valueMerge(input, delta));
@@ -22,7 +23,7 @@ function objectMerge(input, delta) {
         const subOutput = valueMerge(subInput, subValue);
 
         if (subInput !== subOutput) {
-            if (output === undefined) output = clone(input);
+            if (output === undefined) output = clone(input, null);
             output[subKey] = subOutput;
         }
 

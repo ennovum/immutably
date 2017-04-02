@@ -1,6 +1,6 @@
 import pathseq from 'pathseq';
 
-import {clone} from './utils';
+import {clone} from './clone';
 
 function apply(input, path, applyFn) {
     if (path === null || path === undefined) {
@@ -48,7 +48,7 @@ function keyValueApply(input, key, applyFn) {
     const value = applyFn(inputValue);
     if (inputValue === value) return input;
 
-    const output = clone(input);
+    const output = clone(input, null);
     output[key] = value;
     return output;
 }
