@@ -122,6 +122,10 @@ You can find more examples in the test files.
 
 ## Changelog
 
+**1.3.0**
+
+* `immutably.clone` implemented & unit tested
+
 **1.2.2**
 
 * minor refactoring
