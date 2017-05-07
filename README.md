@@ -9,9 +9,17 @@ Non-mutating operations on data structures.
 $ npm install immutably
 ```
 
+## Import
+
+```
+import immutably from 'immutably';
+```
+
 ## Use
 
 ### `apply`
+
+Immutably applies the given function to the respective part of the input data structure.
 
 ```
 output = immutably.apply(input, path, applyFn);
@@ -19,13 +27,13 @@ output = immutably.apply(input, path, applyFn);
 
 **Arguments**
 
-* `input` *(object)* input data object.
-* `path` *(string)* input data object's new nested value path.
+* `input` *(any)* input data structure.
+* `path` *(string)* input data structure's new nested value path.
 * `applyFn` *(function)* a function that gets a value as an argument, applies a change and returns a new value.
 
 **Returns**
 
-* `output` *(object)* output data object with the given new nested value set to the given path.
+* `output` *(any)* output data structure with the given new nested value set to the given path.
 
 **Examples**
 
@@ -40,19 +48,21 @@ You can find more examples in the test files.
 
 ### `set`
 
+Immutably sets the given value to the respective part of the input data structure.
+
 ```
 output = immutably.set(input, path, value);
 ```
 
 **Arguments**
 
-* `input` *(object)* input data object.
-* `path` *(string)* input data object's new nested value path.
-* `value` *(any)* input data object's new nested value.
+* `input` *(any)* input data structure.
+* `path` *(string)* input data structure's new nested value path.
+* `value` *(any)* input data structure's new nested value.
 
 **Returns**
 
-* `output` *(object)* output data object with the given new nested value set to the given path.
+* `output` *(any)* output data structure with the given new nested value set to the given path.
 
 **Examples**
 
@@ -67,19 +77,21 @@ You can find more examples in the test files.
 
 ### `merge`
 
+Immutably merges the given object with the respective part of the input data structure.
+
 ```
 output = immutably.merge(input, path, delta);
 ```
 
 **Arguments**
 
-* `input` *(object)* input data object.
-* `path` *(string)* input data object's merging path.
-* `delta` *(object)* merge data object.
+* `input` *(any)* input data structure.
+* `path` *(string)* input data structure's merging path.
+* `delta` *(object)* merge data structure.
 
 **Returns**
 
-* `output` *(object)* output data object merged with the given merge data object on the given path.
+* `output` *(any)* output data structure merged with the given merge data structure on the given path.
 
 **Examples**
 
@@ -94,19 +106,21 @@ You can find more examples in the test files.
 
 ### `clone`
 
+Immutably clones the respective part of the input data structure.
+
 ```
 output = immutably.clone(input, path, deep);
 ```
 
 **Arguments**
 
-* `input` *(object)* input data object.
-* `path` *(string)* input data object's merging path.
+* `input` *(any)* input data structure.
+* `path` *(string)* input data structure's merging path.
 * `deep` *(object)* deep clone switch.
 
 **Returns**
 
-* `output` *(object)* output data object cloned on the given path.
+* `output` *(any)* output data structure cloned on the given path.
 
 **Examples**
 
