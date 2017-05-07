@@ -3,7 +3,7 @@
   "version": "1.3.0",
   "description": "Non-mutating operations on data structures.",
   "author": "Grzegorz Wasiak (ennovum)",
-  "keywords": ["immutably", "immutable", "immutability", "set", "merge", "data", "structure", "state", "redux", "reducer", "mutation", "mutating"],
+  "keywords": ["immutably", "immutable", "immutability", "set", "merge", "data", "structure", "array", "state", "redux", "reducer", "mutation", "mutating"],
   "repository": "https://github.com/ennovum/immutably",
   "license": "MIT",
   "main": "dist/index.js",
@@ -36,7 +36,7 @@
     "buildconf": "default"
   },
   "scripts": {
-    "cross-env": "node ./node_modules/cross-env/bin/cross-env.js",
+    "cross-env": "node ./node_modules/cross-env/dist/bin/cross-env.js",
     "dev": "npm run cross-env NODE_ENV=development node ./node_modules/gulp/bin/gulp.js dev",
     "lint": "npm run cross-env NODE_ENV=test node ./node_modules/gulp/bin/gulp.js lint",
     "test": "npm run cross-env NODE_ENV=test node ./node_modules/gulp/bin/gulp.js test",
