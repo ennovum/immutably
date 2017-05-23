@@ -136,6 +136,10 @@ You can find more examples in the test files.
 
 ## Changelog
 
+**1.3.2**
+
+* npm broken publish fixed
+
 **1.3.1**
 
 * `module` section removed from `package.json`
