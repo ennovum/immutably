@@ -136,6 +136,11 @@ You can find more examples in the test files.
 
 ## Changelog
 
+**1.3.1**
+
+* `module` section removed from `package.json`
+* dependency related change
+
 **1.3.0**
 
 * `immutably.clone` implemented & unit tested
