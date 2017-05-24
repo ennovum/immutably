@@ -136,6 +136,11 @@ You can find more examples in the test files.
 
 ## Changelog
 
+**1.4.0**
+
+* distribution package UMD setup
+* distribution package includes dependency
+
 **1.3.2**
 
 * npm broken publish fixed
