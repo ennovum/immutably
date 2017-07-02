@@ -19,7 +19,6 @@ function valueApply(input, applyFn) {
 
 function pathApply(input, path, applyFn) {
     const sequence = pathseq(path);
-
     const output = sequenceApply(input, sequence, applyFn);
     return output;
 }
@@ -27,7 +26,7 @@ function pathApply(input, path, applyFn) {
 function sequenceApply(input, sequence, applyFn) {
     const [key, ...subSequence] = sequence;
 
-    if (subSequence.length) {
+    if (subSequence.length > 0) {
         const subInput = input ? input[key] : undefined;
         const subOutput = sequenceApply(subInput, subSequence, applyFn);
         const output = keyValueApply(input, key, () => subOutput);

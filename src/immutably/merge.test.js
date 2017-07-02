@@ -3,7 +3,7 @@ import test from 'tape';
 import {merge} from './merge';
 
 test('immutably / merge / merge a value with the same value', (testCase) => {
-    const testScenario1 = () => {
+    testCase.doesNotThrow(() => {
         const input = true;
         const value = true;
         const resultOutput = merge(input, null, value);
@@ -11,15 +11,23 @@ test('immutably / merge / merge a value with the same value', (testCase) => {
 
         testCase.deepEqual(resultOutput, expectedOutput);
         testCase.equal(input, resultOutput);
-    };
+    });
 
-    testCase.doesNotThrow(testScenario1);
+    testCase.doesNotThrow(() => {
+        const input = {foo: {bar: true}};
+        const value = true;
+        const resultOutput = merge(input, 'foo.bar', value);
+        const expectedOutput = {foo: {bar: true}};
+
+        testCase.deepEqual(resultOutput, expectedOutput);
+        testCase.equal(input, resultOutput);
+    });
 
     testCase.end();
 });
 
 test('immutably / merge / merge a value with a different value', (testCase) => {
-    const testScenario1 = () => {
+    testCase.doesNotThrow(() => {
         const input = false;
         const value = true;
         const resultOutput = merge(input, null, value);
@@ -27,15 +35,23 @@ test('immutably / merge / merge a value with a different value', (testCase) => {
 
         testCase.deepEqual(resultOutput, expectedOutput);
         testCase.notEqual(input, resultOutput);
-    };
+    });
 
-    testCase.doesNotThrow(testScenario1);
+    testCase.doesNotThrow(() => {
+        const input = {foo: {bar: false}};
+        const value = true;
+        const resultOutput = merge(input, 'foo.bar', value);
+        const expectedOutput = {foo: {bar: true}};
+
+        testCase.deepEqual(resultOutput, expectedOutput);
+        testCase.notEqual(input, resultOutput);
+    });
 
     testCase.end();
 });
 
 test('immutably / merge / merge an objecy with the same object', (testCase) => {
-    const testScenario1 = () => {
+    testCase.doesNotThrow(() => {
         const input = [true];
         const value = [true];
         const resultOutput = merge(input, null, value);
@@ -43,11 +59,9 @@ test('immutably / merge / merge an objecy with the same object', (testCase) => {
 
         testCase.deepEqual(resultOutput, expectedOutput);
         testCase.equal(input, resultOutput);
-    };
+    });
 
-    testCase.doesNotThrow(testScenario1);
-
-    const testScenario2 = () => {
+    testCase.doesNotThrow(() => {
         const input = [true, true];
         const value = [true];
         const resultOutput = merge(input, null, value);
@@ -55,11 +69,9 @@ test('immutably / merge / merge an objecy with the same object', (testCase) => {
 
         testCase.deepEqual(resultOutput, expectedOutput);
         testCase.equal(input, resultOutput);
-    };
+    });
 
-    testCase.doesNotThrow(testScenario2);
-
-    const testScenario3 = () => {
+    testCase.doesNotThrow(() => {
         const input = [[true], [true]];
         const value = [[true]];
         const resultOutput = merge(input, null, value);
@@ -69,11 +81,9 @@ test('immutably / merge / merge an objecy with the same object', (testCase) => {
         testCase.equal(input, resultOutput);
         testCase.equal(input[0], resultOutput[0]);
         testCase.equal(input[1], resultOutput[1]);
-    };
+    });
 
-    testCase.doesNotThrow(testScenario3);
-
-    const testScenario4 = () => {
+    testCase.doesNotThrow(() => {
         const input = [[true], [true]];
         const value = [undefined, [true]];
         const resultOutput = merge(input, null, value);
@@ -83,11 +93,9 @@ test('immutably / merge / merge an objecy with the same object', (testCase) => {
         testCase.equal(input, resultOutput);
         testCase.equal(input[0], resultOutput[0]);
         testCase.equal(input[1], resultOutput[1]);
-    };
+    });
 
-    testCase.doesNotThrow(testScenario4);
-
-    const testScenario5 = () => {
+    testCase.doesNotThrow(() => {
         const input = {foo: true};
         const value = {foo: true};
         const resultOutput = merge(input, null, value);
@@ -95,11 +103,9 @@ test('immutably / merge / merge an objecy with the same object', (testCase) => {
 
         testCase.deepEqual(resultOutput, expectedOutput);
         testCase.equal(input, resultOutput);
-    };
+    });
 
-    testCase.doesNotThrow(testScenario5);
-
-    const testScenario6 = () => {
+    testCase.doesNotThrow(() => {
         const input = {foo: true, xxx: true};
         const value = {foo: true};
         const resultOutput = merge(input, null, value);
@@ -107,11 +113,9 @@ test('immutably / merge / merge an objecy with the same object', (testCase) => {
 
         testCase.deepEqual(resultOutput, expectedOutput);
         testCase.equal(input, resultOutput);
-    };
+    });
 
-    testCase.doesNotThrow(testScenario6);
-
-    const testScenario7 = () => {
+    testCase.doesNotThrow(() => {
         const input = {foo: {bar: true}, xxx: {yyy: true}};
         const value = {foo: {bar: true}};
         const resultOutput = merge(input, null, value);
@@ -121,11 +125,9 @@ test('immutably / merge / merge an objecy with the same object', (testCase) => {
         testCase.equal(input, resultOutput);
         testCase.equal(input.foo, resultOutput.foo);
         testCase.equal(input.xxx, resultOutput.xxx);
-    };
+    });
 
-    testCase.doesNotThrow(testScenario7);
-
-    const testScenario8 = () => {
+    testCase.doesNotThrow(() => {
         const input = {foo: {bar: {baz: true}}, xxx: {yyy: true}};
         const value = {baz: true};
         const resultOutput = merge(input, 'foo.bar', value);
@@ -135,11 +137,9 @@ test('immutably / merge / merge an objecy with the same object', (testCase) => {
         testCase.equal(input, resultOutput);
         testCase.equal(input.foo, resultOutput.foo);
         testCase.equal(input.xxx, resultOutput.xxx);
-    };
+    });
 
-    testCase.doesNotThrow(testScenario8);
-
-    const testScenario9 = () => {
+    testCase.doesNotThrow(() => {
         const input = {foo: {bar: {baz: true}, aaa: {bbb: true}}, xxx: {yyy: true}};
         const value = {baz: true};
         const resultOutput = merge(input, 'foo.bar', value);
@@ -151,15 +151,13 @@ test('immutably / merge / merge an objecy with the same object', (testCase) => {
         testCase.equal(input.foo.bar, resultOutput.foo.bar);
         testCase.equal(input.foo.aaa, resultOutput.foo.aaa);
         testCase.equal(input.xxx, resultOutput.xxx);
-    };
-
-    testCase.doesNotThrow(testScenario9);
+    });
 
     testCase.end();
 });
 
 test('immutably / merge / merge an object with a different object', (testCase) => {
-    const testScenario1 = () => {
+    testCase.doesNotThrow(() => {
         const input = [false];
         const value = [true];
         const resultOutput = merge(input, null, value);
@@ -167,11 +165,9 @@ test('immutably / merge / merge an object with a different object', (testCase) =
 
         testCase.deepEqual(resultOutput, expectedOutput);
         testCase.notEqual(input, resultOutput);
-    };
+    });
 
-    testCase.doesNotThrow(testScenario1);
-
-    const testScenario2 = () => {
+    testCase.doesNotThrow(() => {
         const input = [false, true];
         const value = [true];
         const resultOutput = merge(input, null, value);
@@ -179,11 +175,9 @@ test('immutably / merge / merge an object with a different object', (testCase) =
 
         testCase.deepEqual(resultOutput, expectedOutput);
         testCase.notEqual(input, resultOutput);
-    };
+    });
 
-    testCase.doesNotThrow(testScenario2);
-
-    const testScenario3 = () => {
+    testCase.doesNotThrow(() => {
         const input = [[false], [true]];
         const value = [[true]];
         const resultOutput = merge(input, null, value);
@@ -193,11 +187,9 @@ test('immutably / merge / merge an object with a different object', (testCase) =
         testCase.notEqual(input, resultOutput);
         testCase.notEqual(input[0], resultOutput[0]);
         testCase.equal(input[1], resultOutput[1]);
-    };
+    });
 
-    testCase.doesNotThrow(testScenario3);
-
-    const testScenario4 = () => {
+    testCase.doesNotThrow(() => {
         const input = [[true], [false]];
         const value = [undefined, [true]];
         const resultOutput = merge(input, null, value);
@@ -207,11 +199,9 @@ test('immutably / merge / merge an object with a different object', (testCase) =
         testCase.notEqual(input, resultOutput);
         testCase.equal(input[0], resultOutput[0]);
         testCase.notEqual(input[1], resultOutput[1]);
-    };
+    });
 
-    testCase.doesNotThrow(testScenario4);
-
-    const testScenario5 = () => {
+    testCase.doesNotThrow(() => {
         const input = {foo: false};
         const value = {foo: true};
         const resultOutput = merge(input, null, value);
@@ -219,11 +209,9 @@ test('immutably / merge / merge an object with a different object', (testCase) =
 
         testCase.deepEqual(resultOutput, expectedOutput);
         testCase.notEqual(input, resultOutput);
-    };
+    });
 
-    testCase.doesNotThrow(testScenario5);
-
-    const testScenario6 = () => {
+    testCase.doesNotThrow(() => {
         const input = {foo: false, xxx: true};
         const value = {foo: true};
         const resultOutput = merge(input, null, value);
@@ -231,11 +219,9 @@ test('immutably / merge / merge an object with a different object', (testCase) =
 
         testCase.deepEqual(resultOutput, expectedOutput);
         testCase.notEqual(input, resultOutput);
-    };
+    });
 
-    testCase.doesNotThrow(testScenario6);
-
-    const testScenario7 = () => {
+    testCase.doesNotThrow(() => {
         const input = {foo: {bar: false}, xxx: {yyy: true}};
         const value = {foo: {bar: true}};
         const resultOutput = merge(input, null, value);
@@ -245,11 +231,9 @@ test('immutably / merge / merge an object with a different object', (testCase) =
         testCase.notEqual(input, resultOutput);
         testCase.notEqual(input.foo, resultOutput.foo);
         testCase.equal(input.xxx, resultOutput.xxx);
-    };
+    });
 
-    testCase.doesNotThrow(testScenario7);
-
-    const testScenario8 = () => {
+    testCase.doesNotThrow(() => {
         const input = {foo: {bar: {baz: false}}, xxx: {yyy: true}};
         const value = {baz: true};
         const resultOutput = merge(input, 'foo.bar', value);
@@ -260,11 +244,9 @@ test('immutably / merge / merge an object with a different object', (testCase) =
         testCase.notEqual(input.foo, resultOutput.foo);
         testCase.notEqual(input.foo.bar, resultOutput.foo.bar);
         testCase.equal(input.xxx, resultOutput.xxx);
-    };
+    });
 
-    testCase.doesNotThrow(testScenario8);
-
-    const testScenario9 = () => {
+    testCase.doesNotThrow(() => {
         const input = {foo: {bar: {baz: false}, aaa: {bbb: true}}, xxx: {yyy: true}};
         const value = {baz: true};
         const resultOutput = merge(input, 'foo.bar', value);
@@ -276,9 +258,7 @@ test('immutably / merge / merge an object with a different object', (testCase) =
         testCase.notEqual(input.foo.bar, resultOutput.foo.bar);
         testCase.equal(input.foo.aaa, resultOutput.foo.aaa);
         testCase.equal(input.xxx, resultOutput.xxx);
-    };
-
-    testCase.doesNotThrow(testScenario9);
+    });
 
     testCase.end();
 });
