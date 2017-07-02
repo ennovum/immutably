@@ -134,6 +134,10 @@ input.foo.bar === output.foo.bar; // false
 
 You can find more examples in the test files.
 
+## Extensions
+
+* [immutably-array](https://www.npmjs.com/package/immutably-array) - Non-mutating operations on arrays
+
 ## Changelog
 
 **1.4.0**
