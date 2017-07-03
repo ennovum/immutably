@@ -104,6 +104,35 @@ output; // {foo: {bar: {baz: true}}}
 
 You can find more examples in the test files.
 
+### `alt`
+
+Sets the given alternative value to the respective part of the input data structure if it's empty (`undefined`).
+
+```
+output = immutably.alt(input, path, altValue);
+```
+
+**Arguments**
+
+* `input` *(any)* input data structure.
+* `path` *(string)* input data structure nested value path.
+* `altValue` *(any)* input data structure alternative value.
+
+**Returns**
+
+* `output` *(any)* output data structure with the given alternative value set to the given path if necessary.
+
+**Examples**
+
+Basic use:
+```
+const input = {foo: {bar: {baz: undefined}}};
+const output = immutably.alt(input, 'foo.bar.baz', true);
+output; // {foo: {bar: {baz: true}}}
+```
+
+You can find more examples in the test files.
+
 ### `clone`
 
 Clones the respective part of the input data structure.
