@@ -1,9 +1,9 @@
-import {apply, applyOn} from './apply';
+import {applyOn} from './apply';
 import {isPrimitive} from './utils';
 import {clone} from './clone';
 
 function merge(input, path, delta) {
-    return apply(input, path, (input, output) => valueMergeOn(input, delta, output));
+    return mergeOn(input, path, delta);
 }
 
 function mergeOn(input, path, delta, output) {
