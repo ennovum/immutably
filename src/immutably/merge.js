@@ -1,5 +1,5 @@
 import {apply, applyOn} from './apply';
-import {isPrimitive, reduce} from './utils';
+import {isPrimitive} from './utils';
 import {clone} from './clone';
 
 function merge(input, path, delta) {
@@ -18,10 +18,9 @@ function valueMergeOn(input, delta, output) {
 }
 
 function objectMergeOn(input, delta, output) {
-    output = reduce(delta, (output, subValue, subKey) => {
-        if (subValue === undefined) {
-            return output;
-        }
+    output = Object.keys(delta).reduce((output, subKey) => {
+        const subValue = delta[subKey];
+        if (subValue === undefined) return output;
 
         const subInput = input[subKey];
         let subOutput = output ? output[subKey] : undefined;
