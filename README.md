@@ -169,6 +169,11 @@ You can find more examples in the test files.
 
 ## Changelog
 
+**1.5.0**
+
+* `immutably.alt` implemented & unit tested
+* minor refactoring
+
 **1.4.0**
 
 * distribution package UMD setup
