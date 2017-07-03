@@ -19,7 +19,7 @@ import immutably from 'immutably';
 
 ### `apply`
 
-Immutably applies the given function to the respective part of the input data structure.
+Applies the given function to the respective part of the input data structure.
 
 ```
 output = immutably.apply(input, path, applyFn);
@@ -28,7 +28,7 @@ output = immutably.apply(input, path, applyFn);
 **Arguments**
 
 * `input` *(any)* input data structure.
-* `path` *(string)* input data structure's new nested value path.
+* `path` *(string)* input data structure new nested value path.
 * `applyFn` *(function)* a function that gets a value as an argument, applies a change and returns a new value.
 
 **Returns**
@@ -48,7 +48,7 @@ You can find more examples in the test files.
 
 ### `set`
 
-Immutably sets the given value to the respective part of the input data structure.
+Sets the given value to the respective part of the input data structure.
 
 ```
 output = immutably.set(input, path, value);
@@ -57,8 +57,8 @@ output = immutably.set(input, path, value);
 **Arguments**
 
 * `input` *(any)* input data structure.
-* `path` *(string)* input data structure's new nested value path.
-* `value` *(any)* input data structure's new nested value.
+* `path` *(string)* input data structure new nested value path.
+* `value` *(any)* input data structure new nested value.
 
 **Returns**
 
@@ -77,7 +77,7 @@ You can find more examples in the test files.
 
 ### `merge`
 
-Immutably merges the given object with the respective part of the input data structure.
+Merges the given object with the respective part of the input data structure.
 
 ```
 output = immutably.merge(input, path, delta);
@@ -86,7 +86,7 @@ output = immutably.merge(input, path, delta);
 **Arguments**
 
 * `input` *(any)* input data structure.
-* `path` *(string)* input data structure's merging path.
+* `path` *(string)* input data structure merging path.
 * `delta` *(object)* merge data structure.
 
 **Returns**
@@ -106,7 +106,7 @@ You can find more examples in the test files.
 
 ### `clone`
 
-Immutably clones the respective part of the input data structure.
+Clones the respective part of the input data structure.
 
 ```
 output = immutably.clone(input, path, deep);
