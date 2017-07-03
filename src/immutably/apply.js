@@ -3,53 +3,59 @@ import pathseq from 'pathseq';
 import {clone} from './clone';
 
 function apply(input, path, applyFn) {
+    return applyOn(input, path, applyFn);
+}
+
+function applyOn(input, path, applyFn, output) {
     if (path === null || path === undefined) {
-        return valueApply(input, applyFn);
+        return valueApplyOn(input, applyFn, output);
     }
     if (Array.isArray(path)) {
-        return sequenceApply(input, path, applyFn);
+        return sequenceApplyOn(input, path, applyFn, output);
     }
-    return pathApply(input, path, applyFn);
+    return pathApplyOn(input, path, applyFn, output);
 }
 
-function valueApply(input, applyFn) {
-    const output = applyFn(input);
+function valueApplyOn(input, applyFn, output) {
+    output = applyFn(input, output);
     return output;
 }
 
-function pathApply(input, path, applyFn) {
+function pathApplyOn(input, path, applyFn, output) {
     const sequence = pathseq(path);
-    const output = sequenceApply(input, sequence, applyFn);
+    output = sequenceApplyOn(input, sequence, applyFn, output);
     return output;
 }
 
-function sequenceApply(input, sequence, applyFn) {
+function sequenceApplyOn(input, sequence, applyFn, output) {
     const [key, ...subSequence] = sequence;
 
     if (subSequence.length > 0) {
         const subInput = input ? input[key] : undefined;
-        const subOutput = sequenceApply(subInput, subSequence, applyFn);
-        const output = keyValueApply(input, key, () => subOutput);
+        let subOutput = output ? output[key] : undefined;
+        subOutput = sequenceApplyOn(subInput, subSequence, applyFn, subOutput);
+        output = keyValueApplyOn(input, key, () => subOutput, output);
         return output;
     }
     else {
-        const output = keyValueApply(input, key, applyFn);
+        output = keyValueApplyOn(input, key, applyFn, output);
         return output;
     }
 }
 
-function keyValueApply(input, key, applyFn) {
+function keyValueApplyOn(input, key, applyFn, output) {
     if (!input) {
         input = (typeof key === 'number') ? [] : {};
     }
 
     const inputValue = input[key];
-    const value = applyFn(inputValue);
+    const outputValue = output ? output[key] : undefined;
+    const value = applyFn(inputValue, outputValue);
     if (inputValue === value) return input;
 
-    const output = clone(input, null);
+    if (output === undefined || output === input) output = clone(input, null);
     output[key] = value;
     return output;
 }
 
-export {apply};
+export {apply, applyOn};
