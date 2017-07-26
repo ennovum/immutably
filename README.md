@@ -170,6 +170,11 @@ You can find more examples in the test files.
 
 ## Changelog
 
+**1.6.0**
+
+* `immutably.merge` deep switch
+* `immutably.merge` undefined input bug fixed
+
 **1.5.0**
 
 * `immutably.alt` implemented & unit tested
