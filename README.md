@@ -80,7 +80,7 @@ You can find more examples in the test files.
 Merges the given object with the respective part of the input data structure.
 
 ```
-output = immutably.merge(input, path, delta);
+output = immutably.merge(input, path, delta, deep);
 ```
 
 **Arguments**
@@ -88,6 +88,7 @@ output = immutably.merge(input, path, delta);
 * `input` *(any)* input data structure.
 * `path` *(string)* input data structure merging path.
 * `delta` *(object)* merge data structure.
+* `deep` *(object)* deep merge switch.
 
 **Returns**
 
