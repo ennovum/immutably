@@ -22,7 +22,7 @@ function objectMergeOn(input, delta, output) {
         const subValue = delta[subKey];
         if (subValue === undefined) return output;
 
-        const subInput = input[subKey];
+        const subInput = input ? input[subKey] : undefined;
         let subOutput = output ? output[subKey] : undefined;
         subOutput = valueMergeOn(subInput, subValue, subOutput);
 
