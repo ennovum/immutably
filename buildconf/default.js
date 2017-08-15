@@ -68,16 +68,6 @@ conf.webpack = {
         }
     },
     plugins: [
-        new webpack.optimize.UglifyJsPlugin({
-            minimize: (env === ENV_PRODUCTION),
-            sourceMap: (env !== ENV_PRODUCTION),
-            output: {
-                comments: false
-            },
-            compressor: {
-                warnings: false
-            }
-        }),
         new webpack.DefinePlugin({
             ENV: env
         })
