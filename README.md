@@ -166,6 +166,7 @@ You can find more examples in the test files.
 
 ## Extensions
 
+* [immutably-get](https://www.npmjs.com/package/immutably-get) - Getter for non-mutating operations on data structures
 * [immutably-array](https://www.npmjs.com/package/immutably-array) - Non-mutating operations on arrays
 
 ## Changelog
