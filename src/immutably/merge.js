@@ -33,6 +33,7 @@ function objectMergeOn(input, delta, deep, output) {
 
         if (subInput !== subOutput) {
             if (output === undefined || output === input) output = clone(input, null);
+            if (output === undefined) output = {};
             output[subKey] = subOutput;
         }
 
