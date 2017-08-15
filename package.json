@@ -1,6 +1,6 @@
 {
   "name": "immutably",
-  "version": "1.6.0",
+  "version": "1.7.0",
   "description": "Non-mutating operations on data structures.",
   "author": "Grzegorz Wasiak (ennovum)",
   "keywords": ["immutably", "immutable", "immutability", "set", "merge", "data", "structure", "array", "state", "redux", "reducer", "mutation", "mutating"],

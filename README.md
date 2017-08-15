@@ -171,6 +171,13 @@ You can find more examples in the test files.
 
 ## Changelog
 
+**1.7.0**
+
+* merging with empty value fixed
+* build JS compression switched off
+* `package.json` module configured
+* `.npmignore` update
+
 **1.6.0**
 
 * `immutably.merge` deep switch
